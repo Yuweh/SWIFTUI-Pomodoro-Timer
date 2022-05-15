@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct Home: View {
+    
+    @EnvironmentObject var pomodorModel: PomodoroModel
+    
     var body: some View {
         VStack{
             Text("Pomodoro Timer")
@@ -21,6 +24,10 @@ struct Home: View {
                         Circle()
                             .fill(.white.opacity(0.03))
                             .padding(-40)
+                        
+                        Circle()
+                            .trim(from: 0, to: pomodorModel.progress)
+                            .stroke(.white.opacity(0.03), lineWidth: 80)
                         
                         Circle()
                             .fill(Color("BG"))
@@ -51,13 +58,22 @@ struct Home: View {
                                 .frame(width: size.width, height: size.height, alignment: .center)
                             // MARK: Since View is Rotated That's Why using X
                                 .offset(x: -size.height / 2)
+                                .rotationEffect(.init(degrees: pomodorModel.progress * 360))
                             
                         }
+                        
+                        Text(pomodorModel.timerStringValue)
+                            .font(.system(size: 45, weight: .light))
+                            .rotationEffect(.init(degrees:  -90))
+                        
                     }
                     .padding(60)
                     .frame(height: proxy.size.width)
                     .rotationEffect(.init(degrees: -90))
                 }
+                .onTapGesture(perform: {
+                    pomodorModel.progress = 0.5
+                })
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
         }
