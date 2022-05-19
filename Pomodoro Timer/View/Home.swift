@@ -65,11 +65,27 @@ struct Home: View {
                         Text(pomodorModel.timerStringValue)
                             .font(.system(size: 45, weight: .light))
                             .rotationEffect(.init(degrees:  -90))
+                            .animation(.none, value: pomodorModel.progress)
                         
                     }
                     .padding(60)
                     .frame(height: proxy.size.width)
                     .rotationEffect(.init(degrees: -90))
+                    .animation(.easeOut, value: pomodorModel.progress)
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "pause")
+                            .font(.largeTitle.bold())
+                            .foregroundColor(.white)
+                            .frame(width: 80, height: 80)
+                            .background {
+                                Circle()
+                                    .fill(Color("Purple"))
+                            }
+                    }
+
                 }
                 .onTapGesture(perform: {
                     pomodorModel.progress = 0.5
