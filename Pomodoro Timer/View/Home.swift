@@ -74,9 +74,14 @@ struct Home: View {
                     .animation(.easeOut, value: pomodorModel.progress)
                     
                     Button {
+                        if pomodorModel.isStarted {
+                            
+                        } else {
+                            pomodorModel.addNewTimer = true
+                        }
                         
                     } label: {
-                        Image(systemName: "pause")
+                        Image(systemName: !pomodorModel.isStarted ? "timer" : "pause")
                             .font(.largeTitle.bold())
                             .foregroundColor(.white)
                             .frame(width: 80, height: 80)
@@ -84,6 +89,7 @@ struct Home: View {
                                 Circle()
                                     .fill(Color("Purple"))
                             }
+                            .shadow(color: Color("Purple"), radius: 0, x: 0, y: 0)
                     }
 
                 }
