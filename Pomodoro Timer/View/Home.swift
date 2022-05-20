@@ -109,6 +109,21 @@ struct Home: View {
         
         //
     }
+    
+    // MARK: New Timer Bottom Sheet
+    @ViewBuilder
+    func NewTimerView() -> some View {
+        VStack {
+            
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background {
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(Color("BG"))
+                .ignoresSafeArea()
+        }
+    }
 }
 
 struct Home_Previews: PreviewProvider {
